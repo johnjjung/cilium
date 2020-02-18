@@ -453,6 +453,16 @@ func (m *Map) OpenOrCreateUnpinned() (bool, error) {
 	return m.openOrCreate(false)
 }
 
+// Create is similar to OpenOrCreate, but closes the map after creating or
+// opening it.
+func (m *Map) Create() (bool, error) {
+	isNew, err := m.OpenOrCreate()
+	if err != nil {
+		return isNew, err
+	}
+	return isNew, m.Close()
+}
+
 func (m *Map) openOrCreate(pin bool) (bool, error) {
 	if m.fd != 0 {
 		return false, nil
