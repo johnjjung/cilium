@@ -26,6 +26,14 @@ import (
 	"github.com/cilium/cilium/pkg/u8proto"
 )
 
+const (
+	// SockRevNat4MapName is the BPF map name.
+	SockRevNat4MapName = "cilium_lb4_reverse_sk"
+
+	// SockRevNat4MapSize is the maximum number of entries in the BPF map.
+	SockRevNat4MapSize = 256 * 1024
+)
+
 var (
 	Service4MapV2 = bpf.NewMap("cilium_lb4_services_v2",
 		bpf.MapTypeHash,
